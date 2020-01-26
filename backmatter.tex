@@ -1,0 +1,32 @@
+\part*{Riferimenti}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\chapter*{Bibliografia}
+\addcontentsline{toc}{chapter}{\textcolor{maincolor}{Bibliografia}} % Add a Bibliography heading to the table of contents
+
+%------------------------------------------------
+
+\section*{Articoli}
+\addcontentsline{toc}{section}{Articoli}
+\printbibliography[heading=bibempty,type=article]
+
+%------------------------------------------------
+
+\section*{Libri}
+\addcontentsline{toc}{section}{Libri}
+\printbibliography[heading=bibempty,type=book]
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+\cleardoublepage % Make sure the index starts on an odd (right side) page
+\phantomsection
+\setlength{\columnsep}{0.75cm} % Space between the 2 columns of the index
+\addcontentsline{toc}{chapter}{\textcolor{maincolor}{Indice analitico}} % Add an Index heading to the table of contents
+\printindex % Output the index
+
+%----------------------------------------------------------------------------------------
