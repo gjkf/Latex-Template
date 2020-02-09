@@ -42,7 +42,8 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[11pt,fleqn,a4paper]{book} % Default font size and left-justified equations
+\documentclass[11pt,a4paper]{book} % Default font size and left-justified equations
+% Add fleqn if wanted the left-justfied images
 
 \input{structure.tex} % Insert the commands.tex file which contains the majority of the structure behind the template
 
@@ -50,9 +51,7 @@
 
 % To make indices use \index{top|bottom category}
 
-\usepackage{sagetex}
-
-\usepackage[mode=buildnew]{standalone} % Allows for external tikz pictures:
+% To use tikz:
 % Create a tikzpic.tex file
 % Use \documentclass[tikz]{standalone}
 % Create the picture
