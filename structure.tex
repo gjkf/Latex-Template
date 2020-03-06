@@ -28,7 +28,7 @@
 
 \usepackage[italian]{babel} % Italian language/hyphenation
 
-\usepackage{enumitem} % Customize lists
+\usepackage[shortlabels]{enumitem} % Customize lists
 \setlist{nolistsep} % Reduce spacing between bullet points and numbered lists
 
 
@@ -72,15 +72,20 @@
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
+\usepackage{etoolbox}
+\newbool{usebib}
+\setbool{usebib}{true}
+\ifbool{usebib}{%
 \usepackage[style=alphabetic,citestyle=alphabetic,sorting=nyt,sortcites=true,
-autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber,arxiv=pdf]{biblatex}
+autopunct=true,abbreviate=false,backref=true,backend=biber,arxiv=pdf]{biblatex}
 %\addbibresource{bibliography.bib} % BibTeX bibliography file
 \addbibresource{../Bibliography/biblatex.bib}
 \defbibheading{bibempty}{}
-
+}{}%
 \usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
 \usepackage{makeidx} % Required to make an index
 \makeindex % Tells LaTeX to create the files required for indexing
+\usepackage{csquotes}
 
 %----------------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
@@ -309,7 +314,7 @@ autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=
 % Definition equivalnce
 \newcommand{\bydef}{\overset{\text{def}}{=}}
 % Successions
-\newcommand{\suc}[2]{{\{#1\}}_{#2}}
+\newcommand{\suc}[1]{\{#1\}}
 % Replace the empty set symbol
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing
@@ -324,6 +329,15 @@ autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=
 \newcommand{\lin}[1]{\ensuremath{\mathscr{L}\!\left(#1\right)}}
 % Scalar product
 \newcommand{\scalar}[2]{\ensuremath{\left\langle #1,\,#2 \right\rangle}}
+% Vectorial product
+\newcommand{\vectorial}[2]{\ensuremath{#1\times #2}}                                       
+% Gradient                                                                                 
+\newcommand{\grad}[1]{\ensuremath{\vec{\nabla}#1}}
+% Divergence
+\let\olddiv\div
+\renewcommand{\div}[1]{\ensuremath{\scalar{\vec{\nabla}}{#1}}}
+% Rotor
+\newcommand{\rot}[1]{\ensuremath{\vectorial{\vec{\nabla}}{#1}}}
 % Matrix transpose
 \newcommand{\transp}{^\intercal}
 % GL/SL/O/SO/U/SU
@@ -357,6 +371,7 @@ autopunct=true,babel=hyphen,hyperref=true,abbreviate=false,backref=true,backend=
 \renewcommand{\qedsymbol}{$\blacksquare$}
 
 \newtheorem{notation}{Notazione}[chapter]
+\makeatletter
 
 % Boxed/framed environments
 \newtheoremstyle{maincolornumbox}% Theorem style name
@@ -444,7 +459,7 @@ innerbottommargin=5pt]{tBox}
 \newmdenv[skipabove=7pt,
 skipbelow=7pt,
 rightline=false,
-leftline=true,
+leftline=false,
 topline=false,
 bottomline=false,
 backgroundcolor=maincolor!10,
@@ -487,7 +502,7 @@ innertopmargin=0pt,
 leftmargin=0cm,
 rightmargin=0cm,
 linewidth=4pt,
-innerbottommargin=0pt]{dBox}	
+innerbottommargin=3pt]{dBox}	
 
 % Corollary box
 \newmdenv[skipabove=7pt,
@@ -527,7 +542,7 @@ innerbottommargin=5pt]{cBox}
 \leftmargin=35pt % Indentation on the left
 \rightmargin=25pt}\item\ignorespaces % Indentation on the right
 \makebox[-2.5pt]{\begin{tikzpicture}[overlay]
-\node[draw=maincolor!60,line width=1pt,circle,fill=maincolor!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\textcolor{maincolor}{R}};\end{tikzpicture}} % Orange R in a circle
+\node[draw=maincolor!60,line width=1pt,circle,fill=maincolor!25,font=\sffamily\bfseries,inner sep=2pt,outer sep=0pt] at (-15pt,0pt){\scriptsize\textcolor{maincolor}{Oss}};\end{tikzpicture}} % Orange R in a circle
 \advance\baselineskip -1pt}{\end{list}\vskip5pt} % Tighter line spacing and white space after remark
 
 %----------------------------------------------------------------------------------------
@@ -674,7 +689,7 @@ innerbottommargin=5pt]{cBox}
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
-\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor=maincolor,bookmarks=true,bookmarksopen=false}
+\hypersetup{hidelinks,colorlinks=false,breaklinks=true,urlcolor=maincolor,bookmarksopen=false}
 
 \usepackage{bookmark}
 \bookmarksetup{
@@ -718,4 +733,6 @@ addtohook={%
   \def\svgwidth{\marginparwidth}
   \import{./figures/}{#1.pdf_tex}
 }
+\newlength{\minipagespace}
+\setlength{\minipagespace}{2ex}
 \makeatother
